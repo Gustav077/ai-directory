@@ -148,32 +148,17 @@
   </style>
 </head>
 <body>
-  <div class="app">
-    <div class="header">
-      <div class="logo">Directorio IA</div>
-      <div class="badge">Demo</div>
-    </div>
+<div class="search-box" style="position:relative">
+  <input 
+    id="busqueda" 
+    placeholder="Ej: generar imagen, escribir texto, editar video..."
+    oninput="autocompletar()"
+  />
+  <button onclick="buscarIA()">Buscar</button>
 
-    <div class="search-area">
-      <input id="busqueda" type="text" placeholder="Ej: generar imagen, escribir texto, editar video...">
-      <select id="categoria">
-        <option value="All">Todas</option>
-        <option value="Texto">Texto</option>
-        <option value="Imagen">Imagen</option>
-        <option value="Audio">Audio</option>
-        <option value="Video">Video</option>
-        <option value="Chatbot">Chatbot</option>
-        <option value="General">General</option>
-      </select>
+  <div id="sugerencias" class="sugerencias"></div>
+</div>
 
-      <div class="btn-area">
-        <button onclick="buscarIA()">Buscar</button>
-        <button onclick="verTodo()">Ver todo</button>
-      </div>
-    </div>
-
-    <div id="resultados"></div>
-  </div>
 
 <script>
   const aiTools = [
@@ -271,4 +256,5 @@
 </script>
 </body>
 </html>
+
 
