@@ -175,108 +175,100 @@
     <div id="resultados"></div>
   </div>
 
-  <script>
-    const aiTools = [
-      {
-        name: "ChatGPT",
-        category: "Texto",
-        description: "Chat de IA para escribir, responder preguntas, generar ideas y explicar conceptos.",
-        keywords: ["escribir", "texto", "ideas", "responder", "explicar", "chat"],
-        link: "https://chat.openai.com"
-      },
-      {
-        name: "Midjourney",
-        category: "Imagen",
-        description: "Generador de imágenes a partir de texto con estilo artístico.",
-        keywords: ["imagenes", "imagen", "dibujar", "arte", "crear imagen", "diseño"],
-        link: "https://www.midjourney.com"
-      },
-      {
-        name: "Leonardo AI",
-        category: "Imagen",
-        description: "Generador de imágenes y renders de productos con IA.",
-        keywords: ["imagenes", "render", "producto", "diseño", "crear imagen"],
-        link: "https://leonardo.ai"
-      },
-      {
-        name: "Suno",
-        category: "Audio",
-        description: "Generador de música y audio con IA.",
-        keywords: ["musica", "cancion", "audio", "cantar", "crear musica"],
-        link: "https://suno.ai"
-      },
-      {
-        name: "Runway",
-        category: "Video",
-        description: "Herramienta de edición y generación de video con IA.",
-        keywords: ["video", "editar video", "video ia", "crear video"],
-        link: "https://runwayml.com"
-      },
-      {
-        name: "GitHub Copilot",
-        category: "General",
-        description: "Asistente de programación con IA para autocompletar y generar código.",
-        keywords: ["programar", "codigo", "javascript", "html", "app"],
-        link: "https://github.com/features/copilot"
-      }
-    ];
+<script>
+  const aiTools = [
+    {
+      name: "ChatGPT",
+      category: "Texto",
+      keywords: ["escribir", "texto", "ideas", "responder", "explicar", "chat"],
+      link: "https://chat.openai.com"
+    },
+    {
+      name: "Midjourney",
+      category: "Imágenes",
+      keywords: ["imagenes", "imagen", "dibujar", "arte", "crear imagen", "diseño"],
+      link: "https://www.midjourney.com"
+    },
+    {
+      name: "Leonardo AI",
+      category: "Imágenes",
+      keywords: ["imagenes", "render", "producto", "diseño", "crear imagen"],
+      link: "https://leonardo.ai"
+    },
+    {
+      name: "Suno",
+      category: "Música",
+      keywords: ["musica", "cancion", "audio", "cantar", "crear musica"],
+      link: "https://suno.ai"
+    },
+    {
+      name: "Runway",
+      category: "Video",
+      keywords: ["video", "editar video", "video ia", "crear video"],
+      link: "https://runwayml.com"
+    },
+    {
+      name: "GitHub Copilot",
+      category: "Código",
+      keywords: ["programar", "codigo", "javascript", "html", "app"],
+      link: "https://github.com/features/copilot"
+    }
+  ];
 
-    function buscarIA() {
-      const input = document.getElementById("busqueda").value.toLowerCase().trim();
-      const categoria = document.getElementById("categoria").value;
+  function mostrarTodas() {
+    const resultados = document.getElementById("resultados");
+    resultados.innerHTML = "";
 
-      const resultados = document.getElementById("resultados");
-      resultados.innerHTML = "";
+    aiTools.forEach(tool => {
+      const div = document.createElement("div");
+      div.classList.add("card");
+      div.innerHTML = `
+        <a href="${tool.link}" target="_blank">${tool.name}</a>
+        <div class="cat">${tool.category}</div>
+        <div class="keywords">
+          ${tool.keywords.slice(0, 5).map(k => `<span class="keyword">${k}</span>`).join("")}
+        </div>
+      `;
+      resultados.appendChild(div);
+    });
+  }
 
-      if (!input) {
-        resultados.innerHTML = "<div class='no-results'>Escribí algo primero.</div>";
-        return;
-      }
+  function buscarIA() {
+    const input = document.getElementById("busqueda").value.toLowerCase().trim();
+    const resultados = document.getElementById("resultados");
+    resultados.innerHTML = "";
 
-      const matches = aiTools.filter(tool => {
-        const name = tool.name.toLowerCase();
-        const desc = tool.description.toLowerCase();
-        const keywords = tool.keywords.join(" ").toLowerCase();
-        const category = tool.category;
-
-        const matchQuery = name.includes(input) || desc.includes(input) || keywords.includes(input);
-        const matchCategory = (categoria === "All") ? true : category === categoria;
-
-        return matchQuery && matchCategory;
-      });
-
-      if (matches.length === 0) {
-        resultados.innerHTML = "<div class='no-results'>No se encontraron IA para eso 🤷‍♂️</div>";
-        return;
-      }
-
-      matches.forEach(tool => {
-        const div = document.createElement("div");
-        div.className = "card";
-        div.innerHTML = `
-          <h3>${tool.name}</h3>
-          <p>${tool.description}</p>
-          <a href="${tool.link}" target="_blank">Abrir</a>
-        `;
-        resultados.appendChild(div);
-      });
+    if (!input) {
+      resultados.innerHTML = "Escribí algo primero.";
+      return;
     }
 
-    function verTodo() {
-      const resultados = document.getElementById("resultados");
-      resultados.innerHTML = "";
+    const matches = aiTools.filter(tool => {
+      return tool.keywords.some(keyword => input.includes(keyword));
+    });
 
-      aiTools.forEach(tool => {
-        const div = document.createElement("div");
-        div.className = "card";
-        div.innerHTML = `
-          <h3>${tool.name}</h3>
-          <p>${tool.description}</p>
-          <a href="${tool.link}" target="_blank">Abrir</a>
-        `;
-        resultados.appendChild(div);
-      });
+    if (matches.length === 0) {
+      resultados.innerHTML = "No se encontraron IA para eso 🤷‍♂️";
+      return;
     }
-  </script>
+
+    matches.forEach(tool => {
+      const div = document.createElement("div");
+      div.classList.add("card");
+      div.innerHTML = `
+        <a href="${tool.link}" target="_blank">${tool.name}</a>
+        <div class="cat">${tool.category}</div>
+        <div class="keywords">
+          ${tool.keywords.slice(0, 5).map(k => `<span class="keyword">${k}</span>`).join("")}
+        </div>
+      `;
+      resultados.appendChild(div);
+    });
+  }
+
+  // Esto hace que se muestre todo al cargar la página
+  window.onload = mostrarTodas;
+</script>
 </body>
 </html>
+
