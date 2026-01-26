@@ -253,8 +253,37 @@
 
   // Esto hace que se muestre todo al cargar la página
   window.onload = mostrarTodas;
+  function autocompletar(){
+  const input = document.getElementById("busqueda").value.toLowerCase();
+  const contenedor = document.getElementById("sugerencias");
+  contenedor.innerHTML = "";
+
+  if(input.length < 2){
+    contenedor.innerHTML = "";
+    return;
+  }
+
+  const sugerencias = aiTools.filter(tool =>
+    tool.name.toLowerCase().includes(input) ||
+    tool.keywords.some(k => k.includes(input))
+  ).slice(0,5);
+
+  sugerencias.forEach(tool => {
+    const div = document.createElement("div");
+    div.className = "sugerencia";
+    div.textContent = tool.name;
+    div.onclick = () => {
+      document.getElementById("busqueda").value = tool.name;
+      contenedor.innerHTML = "";
+      buscarIA();
+    };
+    contenedor.appendChild(div);
+  });
+}
+
 </script>
 </body>
 </html>
+
 
 
