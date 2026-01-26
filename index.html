@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Directorio de IA</title>
+  <style>
+    :root {
+      --red: #d40000;
+      --white: #ffffff;
+      --dark: #111;
+      --light: #f5f5f5;
+      --card: #fff;
+      --shadow: rgba(0, 0, 0, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      margin: 0;
+      padding: 0;
+    }
+
+    .app {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--red);
+    }
+
+    .badge {
+      background: var(--red);
+      color: var(--white);
+      padding: 6px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .search-area {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    input, select {
+      padding: 14px;
+      font-size: 16px;
+      border: 2px solid var(--red);
+      border-radius: 16px;
+      outline: none;
+      background: var(--white);
+    }
+
+    input:focus, select:focus {
+      border-color: #ff0000;
+      box-shadow: 0 0 0 3px rgba(212, 0, 0, 0.18);
+    }
+
+    .btn-area {
+      display: flex;
+      gap: 10px;
+    }
+
+    button {
+      flex: 1;
+      padding: 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--white);
+      background: var(--red);
+      transition: transform 0.2s ease;
+    }
+
+    button:hover {
+      background: #ff0000;
+      transform: translateY(-2px);
+    }
+
+    #resultados {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .card {
+      border: 2px solid var(--red);
+      border-radius: 18px;
+      padding: 14px;
+      background: var(--card);
+      box-shadow: 0 6px 18px var(--shadow);
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 18px;
+      color: var(--red);
+    }
+
+    .card p {
+      margin: 8px 0;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .card a {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: var(--white);
+      background: var(--red);
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-weight: bold;
+    }
+
+    .no-results {
+      text-align: center;
+      color: #777;
+      font-size: 14px;
+      padding: 20px;
+      border: 1px dashed #ddd;
+      border-radius: 16px;
+      background: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="header">
+      <div class="logo">Directorio IA</div>
+      <div class="badge">Demo</div>
+    </div>
+
+    <div class="search-area">
+      <input id="busqueda" type="text" placeholder="Ej: generar imagen, escribir texto, editar video...">
+      <select id="categoria">
+        <option value="All">Todas</option>
+        <option value="Texto">Texto</option>
+        <option value="Imagen">Imagen</option>
+        <option value="Audio">Audio</option>
+        <option value="Video">Video</option>
+        <option value="Chatbot">Chatbot</option>
+        <option value="General">General</option>
+      </select>
+
+      <div class="btn-area">
+        <button onclick="buscarIA()">Buscar</button>
+        <button onclick="verTodo()">Ver todo</button>
+      </div>
+    </div>
+
+    <div id="resultados"></div>
+  </div>
+
+  <script>
+    const aiTools = [
+      {
+        name: "ChatGPT",
+        category: "Texto",
+        description: "Chat de IA para escribir, responder preguntas, generar ideas y explicar conceptos.",
+        keywords: ["escribir", "texto", "ideas", "responder", "explicar", "chat"],
+        link: "https://chat.openai.com"
+      },
+      {
+        name: "Midjourney",
+        category: "Imagen",
+        description: "Generador de imágenes a partir de texto con estilo artístico.",
+        keywords: ["imagenes", "imagen", "dibujar", "arte", "crear imagen", "diseño"],
+        link: "https://www.midjourney.com"
+      },
+      {
+        name: "Leonardo AI",
+        category: "Imagen",
+        description: "Generador de imágenes y renders de productos con IA.",
+        keywords: ["imagenes", "render", "producto", "diseño", "crear imagen"],
+        link: "https://leonardo.ai"
+      },
+      {
+        name: "Suno",
+        category: "Audio",
+        description: "Generador de música y audio con IA.",
+        keywords: ["musica", "cancion", "audio", "cantar", "crear musica"],
+        link: "https://suno.ai"
+      },
+      {
+        name: "Runway",
+        category: "Video",
+        description: "Herramienta de edición y generación de video con IA.",
+        keywords: ["video", "editar video", "video ia", "crear video"],
+        link: "https://runwayml.com"
+      },
+      {
+        name: "GitHub Copilot",
+        category: "General",
+        description: "Asistente de programación con IA para autocompletar y generar código.",
+        keywords: ["programar", "codigo", "javascript", "html", "app"],
+        link: "https://github.com/features/copilot"
+      }
+    ];
+
+    function buscarIA() {
+      const input = document.getElementById("busqueda").value.toLowerCase().trim();
+      const categoria = document.getElementById("categoria").value;
+
+      const resultados = document.getElementById("resultados");
+      resultados.innerHTML = "";
+
+      if (!input) {
+        resultados.innerHTML = "<div class='no-results'>Escribí algo primero.</div>";
+        return;
+      }
+
+      const matches = aiTools.filter(tool => {
+        const name = tool.name.toLowerCase();
+        const desc = tool.description.toLowerCase();
+        const keywords = tool.keywords.join(" ").toLowerCase();
+        const category = tool.category;
+
+        const matchQuery = name.includes(input) || desc.includes(input) || keywords.includes(input);
+        const matchCategory = (categoria === "All") ? true : category === categoria;
+
+        return matchQuery && matchCategory;
+      });
+
+      if (matches.length === 0) {
+        resultados.innerHTML = "<div class='no-results'>No se encontraron IA para eso 🤷‍♂️</div>";
+        return;
+      }
+
+      matches.forEach(tool => {
+        const div = document.createElement("div");
+        div.className = "card";
+        div.innerHTML = `
+          <h3>${tool.name}</h3>
+          <p>${tool.description}</p>
+          <a href="${tool.link}" target="_blank">Abrir</a>
+        `;
+        resultados.appendChild(div);
+      });
+    }
+
+    function verTodo() {
+      const resultados = document.getElementById("resultados");
+      resultados.innerHTML = "";
+
+      aiTools.forEach(tool => {
+        const div = document.createElement("div");
+        div.className = "card";
+        div.innerHTML = `
+          <h3>${tool.name}</h3>
+          <p>${tool.description}</p>
+          <a href="${tool.link}" target="_blank">Abrir</a>
+        `;
+        resultados.appendChild(div);
+      });
+    }
+  </script>
+</body>
+</html>
