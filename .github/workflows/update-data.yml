@@ -1,0 +1,46 @@
+name: Actualizar IA
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # se ejecuta todos los domingos a medianoche
+  workflow_dispatch:    # también lo podés ejecutar manualmente
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repo
+        uses: actions/checkout@v4
+
+      - name: Actualizar data.json
+        run: |
+          python3 - <<'PY'
+          import json
+
+          # Abrir el archivo data.json
+          with open("data.json", "r", encoding="utf-8") as f:
+              data = json.load(f)
+
+          # Agregar una IA de prueba (para demostrar que funciona)
+          data.append({
+            "name": "IA Demo",
+            "category": "demo",
+            "keywords": ["demo", "prueba"],
+            "link": "https://example.com"
+          })
+
+          # Guardar el archivo actualizado
+          with open("data.json", "w", encoding="utf-8") as f:
+              json.dump(data, f, ensure_ascii=False, indent=2)
+
+          print("data.json actualizado")
+          PY
+
+      - name: Commit y push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data.json
+          git commit -m "Actualización automática de data.json" || echo "No hay cambios"
+          git push
