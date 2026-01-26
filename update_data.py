@@ -2,15 +2,31 @@ import requests, json
 
 GITHUB_SEARCH_URL = "https://api.github.com/search/repositories"
 
-# Palabras clave para buscar herramientas de IA
 keywords = [
     "ai tool",
     "ai assistant",
     "text-to-image",
     "llm",
     "ai generator",
-    "chatbot"
+    "chatbot",
+    "voice ai",
+    "audio ai",
+    "video ai"
 ]
+
+def get_category(keyword):
+    keyword = keyword.lower()
+    if "text-to-image" in keyword or "image" in keyword:
+        return "Imagen"
+    if "chatbot" in keyword or "assistant" in keyword:
+        return "Chatbot"
+    if "voice" in keyword or "audio" in keyword:
+        return "Audio"
+    if "video" in keyword:
+        return "Video"
+    if "text" in keyword or "nlp" in keyword:
+        return "Texto"
+    return "General"
 
 def search_github(query):
     params = {
@@ -44,11 +60,12 @@ def main():
             repo_url = item["html_url"]
             name = item["name"]
             desc = item.get("description") or "Sin descripción"
-            
+            category = get_category(kw)
+
             if not exists(data, repo_url):
                 data.append({
                     "name": name,
-                    "category": "github",
+                    "category": category,
                     "keywords": [kw],
                     "link": repo_url,
                     "description": desc
