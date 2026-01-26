@@ -13,39 +13,19 @@ jobs:
       - name: Clonar repo
         uses: actions/checkout@v4
 
-      - name: Actualizar data.json
+      - name: Instalar dependencias
         run: |
-          python3 - <<'PY'
-          import json, os
+          python3 -m pip install requests
 
-          file_path = "data.json"
-
-          with open(file_path, "r", encoding="utf-8") as f:
-              data = json.load(f)
-
-          # Agrega IA de prueba solo si no existe
-          if not any(item.get("name") == "IA Demo" for item in data):
-              data.append({
-                "name": "IA Demo",
-                "category": "demo",
-                "keywords": ["demo", "prueba"],
-                "link": "https://example.com"
-              })
-
-              with open(file_path, "w", encoding="utf-8") as f:
-                  json.dump(data, f, ensure_ascii=False, indent=2)
-
-              print("data.json actualizado")
-          else:
-              print("Ya existe IA Demo. No se realizaron cambios.")
-          PY
+      - name: Actualizar data.json desde GitHub API
+        run: |
+          python3 update_data.py
 
       - name: Commit y push (solo si hay cambios)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Solo commitea si hay cambios
           if [[ `git status --porcelain` ]]; then
             git add data.json
             git commit -m "Actualización automática de data.json"
