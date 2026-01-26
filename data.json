@@ -2,13 +2,35 @@
   {
     "name": "ChatGPT",
     "category": "texto",
-    "keywords": ["escribir", "texto", "ideas", "responder", "explicar", "chat"],
+    "keywords": [
+      "escribir",
+      "texto",
+      "ideas",
+      "responder",
+      "explicar",
+      "chat"
+    ],
     "link": "https://chat.openai.com"
   },
   {
     "name": "Midjourney",
     "category": "imagenes",
-    "keywords": ["imagenes", "dibujar", "arte", "crear imagen", "diseño"],
+    "keywords": [
+      "imagenes",
+      "dibujar",
+      "arte",
+      "crear imagen",
+      "diseño"
+    ],
     "link": "https://www.midjourney.com"
+  },
+  {
+    "name": "IA Demo",
+    "category": "demo",
+    "keywords": [
+      "demo",
+      "prueba"
+    ],
+    "link": "https://example.com"
   }
 ]
