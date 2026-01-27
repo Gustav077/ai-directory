@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Directorio de IA</title>
+  <title>Buscador de IA para Dummies</title>
+
   <style>
     :root {
       --red: #d40000;
@@ -54,34 +55,29 @@
       font-weight: bold;
     }
 
-    .search-area {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+    .search-box {
+      position: relative;
       margin-bottom: 15px;
     }
 
-    input, select {
+    input {
+      width: 100%;
       padding: 14px;
       font-size: 16px;
       border: 2px solid var(--red);
       border-radius: 16px;
       outline: none;
       background: var(--white);
+      margin-bottom: 10px;
     }
 
-    input:focus, select:focus {
+    input:focus {
       border-color: #ff0000;
       box-shadow: 0 0 0 3px rgba(212, 0, 0, 0.18);
     }
 
-    .btn-area {
-      display: flex;
-      gap: 10px;
-    }
-
     button {
-      flex: 1;
+      width: 100%;
       padding: 14px;
       font-size: 16px;
       border: none;
@@ -90,19 +86,40 @@
       font-weight: bold;
       color: var(--white);
       background: var(--red);
-      transition: transform 0.2s ease;
     }
 
     button:hover {
       background: #ff0000;
-      transform: translateY(-2px);
+    }
+
+    .sugerencias {
+      position: absolute;
+      top: 55px;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border: 2px solid var(--red);
+      border-radius: 16px;
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    .sugerencia {
+      padding: 12px;
+      cursor: pointer;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+
+    .sugerencia:hover {
+      background: #f5f5f5;
     }
 
     #resultados {
       display: flex;
       flex-direction: column;
       gap: 12px;
-      margin-top: 10px;
+      margin-top: 20px;
     }
 
     .card {
@@ -113,177 +130,161 @@
       box-shadow: 0 6px 18px var(--shadow);
     }
 
-    .card h3 {
-      margin: 0;
-      font-size: 18px;
-      color: var(--red);
-    }
-
-    .card p {
-      margin: 8px 0;
-      font-size: 14px;
-      color: #444;
-    }
-
     .card a {
-      display: inline-block;
-      margin-top: 10px;
       text-decoration: none;
       color: var(--white);
       background: var(--red);
       padding: 10px 14px;
       border-radius: 14px;
       font-weight: bold;
+      display: inline-block;
     }
 
-    .no-results {
-      text-align: center;
+    .cat {
+      font-size: 12px;
+      margin-top: 6px;
+      color: #555;
+    }
+
+    .keywords {
+      margin-top: 6px;
+      font-size: 12px;
       color: #777;
-      font-size: 14px;
-      padding: 20px;
-      border: 1px dashed #ddd;
-      border-radius: 16px;
-      background: #fff;
     }
   </style>
 </head>
+
 <body>
-<div class="search-box" style="position:relative">
-  <input 
-    id="busqueda" 
-    placeholder="Ej: generar imagen, escribir texto, editar video..."
-    oninput="autocompletar()"
-  />
-  <button onclick="buscarIA()">Buscar</button>
+  <div class="app">
 
-  <div id="sugerencias" class="sugerencias"></div>
-</div>
+    <div class="header">
+      <div class="logo">Buscador de IA para Dummies</div>
+      <div class="badge">BETA</div>
+    </div>
 
+    <div class="search-box">
+      <input
+        id="busqueda"
+        placeholder="Ej: generar imagen, escribir texto, editar video..."
+        oninput="autocompletar()"
+      >
+      <button onclick="buscarIA()">Buscar</button>
+      <div id="sugerencias" class="sugerencias"></div>
+    </div>
 
-<script>
-  const aiTools = [
-    {
-      name: "ChatGPT",
-      category: "Texto",
-      keywords: ["escribir", "texto", "ideas", "responder", "explicar", "chat"],
-      link: "https://chat.openai.com"
-    },
-    {
-      name: "Midjourney",
-      category: "Imágenes",
-      keywords: ["imagenes", "imagen", "dibujar", "arte", "crear imagen", "diseño"],
-      link: "https://www.midjourney.com"
-    },
-    {
-      name: "Leonardo AI",
-      category: "Imágenes",
-      keywords: ["imagenes", "render", "producto", "diseño", "crear imagen"],
-      link: "https://leonardo.ai"
-    },
-    {
-      name: "Suno",
-      category: "Música",
-      keywords: ["musica", "cancion", "audio", "cantar", "crear musica"],
-      link: "https://suno.ai"
-    },
-    {
-      name: "Runway",
-      category: "Video",
-      keywords: ["video", "editar video", "video ia", "crear video"],
-      link: "https://runwayml.com"
-    },
-    {
-      name: "GitHub Copilot",
-      category: "Código",
-      keywords: ["programar", "codigo", "javascript", "html", "app"],
-      link: "https://github.com/features/copilot"
-    }
-  ];
+    <div id="resultados"></div>
 
-  function mostrarTodas() {
-    const resultados = document.getElementById("resultados");
-    resultados.innerHTML = "";
+  </div>
 
-    aiTools.forEach(tool => {
-      const div = document.createElement("div");
-      div.classList.add("card");
-      div.innerHTML = `
-        <a href="${tool.link}" target="_blank">${tool.name}</a>
-        <div class="cat">${tool.category}</div>
-        <div class="keywords">
-          ${tool.keywords.slice(0, 5).map(k => `<span class="keyword">${k}</span>`).join("")}
-        </div>
-      `;
-      resultados.appendChild(div);
-    });
-  }
+  <script>
+    const aiTools = [
+      {
+        name: "ChatGPT",
+        category: "Texto",
+        keywords: ["escribir", "texto", "ideas", "responder", "explicar", "chat"],
+        link: "https://chat.openai.com"
+      },
+      {
+        name: "Midjourney",
+        category: "Imágenes",
+        keywords: ["imagen", "imagenes", "dibujar", "arte", "diseño"],
+        link: "https://www.midjourney.com"
+      },
+      {
+        name: "Leonardo AI",
+        category: "Imágenes",
+        keywords: ["render", "producto", "diseño", "imagen"],
+        link: "https://leonardo.ai"
+      },
+      {
+        name: "Suno",
+        category: "Música",
+        keywords: ["musica", "cancion", "audio"],
+        link: "https://suno.ai"
+      },
+      {
+        name: "Runway",
+        category: "Video",
+        keywords: ["video", "editar video", "crear video"],
+        link: "https://runwayml.com"
+      },
+      {
+        name: "GitHub Copilot",
+        category: "Código",
+        keywords: ["codigo", "programar", "javascript", "html"],
+        link: "https://github.com/features/copilot"
+      }
+    ];
 
-  function buscarIA() {
-    const input = document.getElementById("busqueda").value.toLowerCase().trim();
-    const resultados = document.getElementById("resultados");
-    resultados.innerHTML = "";
+    function mostrarTodas() {
+      const resultados = document.getElementById("resultados");
+      resultados.innerHTML = "";
 
-    if (!input) {
-      resultados.innerHTML = "Escribí algo primero.";
-      return;
+      aiTools.forEach(tool => {
+        const div = document.createElement("div");
+        div.className = "card";
+        div.innerHTML = `
+          <a href="${tool.link}" target="_blank">${tool.name}</a>
+          <div class="cat">${tool.category}</div>
+          <div class="keywords">${tool.keywords.join(", ")}</div>
+        `;
+        resultados.appendChild(div);
+      });
     }
 
-    const matches = aiTools.filter(tool => {
-      return tool.keywords.some(keyword => input.includes(keyword));
-    });
+    function buscarIA() {
+      const input = document.getElementById("busqueda").value.toLowerCase();
+      const resultados = document.getElementById("resultados");
+      resultados.innerHTML = "";
 
-    if (matches.length === 0) {
-      resultados.innerHTML = "No se encontraron IA para eso 🤷‍♂️";
-      return;
+      const matches = aiTools.filter(tool =>
+        tool.keywords.some(k => input.includes(k))
+      );
+
+      if (matches.length === 0) {
+        resultados.innerHTML = "No se encontraron resultados 🤷‍♂️";
+        return;
+      }
+
+      matches.forEach(tool => {
+        const div = document.createElement("div");
+        div.className = "card";
+        div.innerHTML = `
+          <a href="${tool.link}" target="_blank">${tool.name}</a>
+          <div class="cat">${tool.category}</div>
+          <div class="keywords">${tool.keywords.join(", ")}</div>
+        `;
+        resultados.appendChild(div);
+      });
     }
 
-    matches.forEach(tool => {
-      const div = document.createElement("div");
-      div.classList.add("card");
-      div.innerHTML = `
-        <a href="${tool.link}" target="_blank">${tool.name}</a>
-        <div class="cat">${tool.category}</div>
-        <div class="keywords">
-          ${tool.keywords.slice(0, 5).map(k => `<span class="keyword">${k}</span>`).join("")}
-        </div>
-      `;
-      resultados.appendChild(div);
-    });
-  }
+    function autocompletar() {
+      const input = document.getElementById("busqueda").value.toLowerCase();
+      const cont = document.getElementById("sugerencias");
+      cont.innerHTML = "";
 
-  // Esto hace que se muestre todo al cargar la página
-  window.onload = mostrarTodas;
-  function autocompletar(){
-  const input = document.getElementById("busqueda").value.toLowerCase();
-  const contenedor = document.getElementById("sugerencias");
-  contenedor.innerHTML = "";
+      if (input.length < 2) return;
 
-  if(input.length < 2){
-    contenedor.innerHTML = "";
-    return;
-  }
+      aiTools
+        .filter(t =>
+          t.name.toLowerCase().includes(input) ||
+          t.keywords.some(k => k.includes(input))
+        )
+        .slice(0, 5)
+        .forEach(tool => {
+          const div = document.createElement("div");
+          div.className = "sugerencia";
+          div.textContent = tool.name;
+          div.onclick = () => {
+            document.getElementById("busqueda").value = tool.name;
+            cont.innerHTML = "";
+            buscarIA();
+          };
+          cont.appendChild(div);
+        });
+    }
 
-  const sugerencias = aiTools.filter(tool =>
-    tool.name.toLowerCase().includes(input) ||
-    tool.keywords.some(k => k.includes(input))
-  ).slice(0,5);
-
-  sugerencias.forEach(tool => {
-    const div = document.createElement("div");
-    div.className = "sugerencia";
-    div.textContent = tool.name;
-    div.onclick = () => {
-      document.getElementById("busqueda").value = tool.name;
-      contenedor.innerHTML = "";
-      buscarIA();
-    };
-    contenedor.appendChild(div);
-  });
-}
-
-</script>
+    window.onload = mostrarTodas;
+  </script>
 </body>
 </html>
-
-
-
