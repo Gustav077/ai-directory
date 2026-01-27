@@ -104,52 +104,41 @@ button {
 </div>
 
 <script>
-const aiTools = [
-  { name:"ChatGPT", category:"Texto", keywords:["texto","escribir","chat"], link:"https://chat.openai.com", top:true },
-  { name:"Midjourney", category:"Imágenes", keywords:["imagen","arte"], link:"https://www.midjourney.com", top:true },
-  { name:"Suno", category:"Música", keywords:["musica","audio"], link:"https://suno.ai", top:true },
-  { name:"Leonardo AI", category:"Imágenes", keywords:["render","producto"], link:"https://leonardo.ai" },
-  { name:"Runway", category:"Video", keywords:["video","editar"], link:"https://runwayml.com" },
-  { name:"GitHub Copilot", category:"Código", keywords:["codigo","programar"], link:"https://github.com/features/copilot" }
-];
+function buscarIA() {
+  const input = busqueda.value.toLowerCase().trim();
+  resultados.innerHTML = "";
 
-function crearCard(tool){
-  return `
-    <div class="card">
-      <a href="${tool.link}" target="_blank">${tool.name}</a>
-      <small>${tool.category}</small>
-    </div>
-  `;
-}
-
-function cargarRecomendadas(){
-  const cont = document.getElementById("recomendadas");
-  cont.innerHTML = "";
-  aiTools.filter(t => t.top).forEach(t => {
-    cont.innerHTML += crearCard(t);
-  });
-}
-
-function buscarIA(){
-  const q = document.getElementById("busqueda").value.toLowerCase();
-  const res = document.getElementById("resultados");
-  res.innerHTML = "";
-
-  if(!q) return;
-
-  const matches = aiTools.filter(t =>
-    t.keywords.some(k => q.includes(k))
-  );
-
-  if(matches.length === 0){
-    res.innerHTML = "<p>No se encontró nada 🤷‍♂️</p>";
+  if (input.length < 2) {
+    resultados.innerHTML = "<p>Escribí un poco más 👆</p>";
     return;
   }
 
-  matches.forEach(t => res.innerHTML += crearCard(t));
-}
+  // coincidencias fuertes
+  let matches = aiTools.filter(tool =>
+    tool.keywords.some(k => input.includes(k))
+  );
 
-window.onload = cargarRecomendadas;
+  if (matches.length > 0) {
+    matches.forEach(t => resultados.innerHTML += card(t));
+    return;
+  }
+
+  // coincidencias débiles (sugerencias)
+  let sugeridas = aiTools.filter(tool =>
+    tool.keywords.some(k => k.includes(input) || input.includes(k))
+  ).slice(0,3);
+
+  if (sugeridas.length > 0) {
+    resultados.innerHTML = `<p>No encontré exacto 😅 ¿Quizás buscabas?</p>`;
+    sugeridas.forEach(t => resultados.innerHTML += card(t));
+    resultados.innerHTML += `<p>👉 Podés seguir escribiendo para afinar</p>`;
+    return;
+  }
+
+  resultados.innerHTML = `<p>No encontré nada todavía 🤔 seguí escribiendo…</p>`;
+}
 </script>
+
 </body>
 </html>
+
