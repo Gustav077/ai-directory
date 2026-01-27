@@ -1,121 +1,175 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Buscador de IA para Dummies</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buscador de IA para Dummies</title>
 
-  <!-- ESTILOS (STYLE) -->
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      margin: 0;
-      padding: 40px;
-    }
+<style>
+:root{
+  --red:#d40000;
+  --bg:#f4f4f4;
+  --card:#ffffff;
+}
 
-    h1 {
-      text-align: center;
-      color: #cc0000;
-    }
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:var(--bg);
+}
 
-    .container {
-      max-width: 600px;
-      margin: auto;
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
+.app{
+  max-width:480px;
+  margin:auto;
+  padding:15px;
+}
 
-    .search-box {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
+h1{
+  color:var(--red);
+  text-align:center;
+  margin-bottom:10px;
+}
 
-    input {
-      flex: 1;
-      padding: 12px;
-      font-size: 16px;
-      border: 2px solid #cc0000;
-      border-radius: 8px;
-    }
+input{
+  width:100%;
+  padding:14px;
+  border-radius:16px;
+  border:2px solid var(--red);
+  font-size:16px;
+}
 
-    button {
-      padding: 12px 20px;
-      font-size: 16px;
-      background-color: #cc0000;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
+.buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:12px 0;
+}
 
-    button:hover {
-      background-color: #a80000;
-    }
+.buttons button{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:14px;
+  background:var(--red);
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+}
 
-    ul {
-      list-style: none;
-      padding: 0;
-    }
+.card{
+  background:var(--card);
+  border-radius:18px;
+  padding:15px;
+  margin-bottom:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,.1);
+}
 
-    li {
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-    }
+.card h3{
+  margin:0;
+  color:var(--red);
+}
 
-    a {
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-    }
-  </style>
+.card p{
+  font-size:14px;
+  margin:6px 0;
+}
+
+.card a{
+  display:block;
+  text-align:center;
+  background:var(--red);
+  color:#fff;
+  text-decoration:none;
+  padding:10px;
+  border-radius:14px;
+  font-weight:bold;
+  margin-top:10px;
+}
+</style>
 </head>
 
 <body>
+<div class="app">
 
-  <div class="container">
-    <h1>🤖 Buscador de IA para Dummies</h1>
+<h1>🤖 Buscador de IA para Dummies</h1>
 
-    <div class="search-box">
-      <input type="text" id="searchInput" placeholder="Ej: imágenes, texto, voz...">
-      <button onclick="buscar()">Buscar</button>
-    </div>
+<input id="busqueda" placeholder="Ej: imágenes, texto, video..." oninput="buscarTexto()">
 
-    <ul id="resultados"></ul>
-  </div>
+<div class="buttons">
+  <button onclick="filtrar('todas')">🧠 Todas</button>
+  <button onclick="filtrar('texto')">✍️ Texto</button>
+  <button onclick="filtrar('imagenes')">🖼️ Imágenes</button>
+  <button onclick="filtrar('video')">🎬 Video</button>
+  <button onclick="filtrar('musica')">🎧 Música</button>
+</div>
 
-  <!-- SCRIPT -->
-  <script>
-    const herramientas = [
-      { nombre: "ChatGPT", categoria: "texto", link: "https://chat.openai.com" },
-      { nombre: "Midjourney", categoria: "imagenes", link: "https://www.midjourney.com" },
-      { nombre: "Leonardo AI", categoria: "imagenes", link: "https://leonardo.ai" },
-      { nombre: "ElevenLabs", categoria: "voz", link: "https://elevenlabs.io" }
-    ];
+<div id="resultados"></div>
 
-    function buscar() {
-      const texto = document.getElementById("searchInput").value.toLowerCase();
-      const lista = document.getElementById("resultados");
-      lista.innerHTML = "";
+</div>
 
-      const filtrados = herramientas.filter(h =>
-        h.categoria.includes(texto) || h.nombre.toLowerCase().includes(texto)
-      );
+<script>
+const aiTools = [
+{
+  name:"ChatGPT",
+  category:"texto",
+  desc:"Sirve para escribir textos, responder preguntas y explicar cosas.",
+  link:"https://chat.openai.com"
+},
+{
+  name:"Midjourney",
+  category:"imagenes",
+  desc:"Crea imágenes y arte a partir de texto.",
+  link:"https://www.midjourney.com"
+},
+{
+  name:"Leonardo AI",
+  category:"imagenes",
+  desc:"Ideal para renders, productos y diseño visual.",
+  link:"https://leonardo.ai"
+},
+{
+  name:"Suno",
+  category:"musica",
+  desc:"Genera canciones y música con inteligencia artificial.",
+  link:"https://suno.ai"
+},
+{
+  name:"Runway",
+  category:"video",
+  desc:"Crea y edita videos con IA.",
+  link:"https://runwayml.com"
+}
+];
 
-      if (filtrados.length === 0) {
-        lista.innerHTML = "<li>No se encontraron resultados</li>";
-        return;
-      }
+function mostrar(lista){
+  const cont=document.getElementById("resultados");
+  cont.innerHTML="";
+  lista.forEach(t=>{
+    cont.innerHTML+=`
+      <div class="card">
+        <h3>${t.name}</h3>
+        <p>${t.desc}</p>
+        <a href="${t.link}" target="_blank">👉 Usar esta IA</a>
+      </div>
+    `;
+  });
+}
 
-      filtrados.forEach(h => {
-        const li = document.createElement("li");
-        li.innerHTML = `<a href="${h.link}" target="_blank">${h.nombre}</a> – ${h.categoria}`;
-        lista.appendChild(li);
-      });
-    }
-  </script>
+function filtrar(cat){
+  if(cat==="todas"){
+    mostrar(aiTools);
+  }else{
+    mostrar(aiTools.filter(t=>t.category===cat));
+  }
+}
+
+function buscarTexto(){
+  const txt=document.getElementById("busqueda").value.toLowerCase();
+  mostrar(aiTools.filter(t=>t.name.toLowerCase().includes(txt) || t.desc.toLowerCase().includes(txt)));
+}
+
+window.onload=()=>mostrar(aiTools);
+</script>
 
 </body>
 </html>
