@@ -2,289 +2,120 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Buscador de IA para Dummies</title>
 
+  <!-- ESTILOS (STYLE) -->
   <style>
-    :root {
-      --red: #d40000;
-      --white: #ffffff;
-      --dark: #111;
-      --light: #f5f5f5;
-      --card: #fff;
-      --shadow: rgba(0, 0, 0, 0.12);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       font-family: Arial, sans-serif;
-      background: var(--light);
-      color: var(--dark);
+      background-color: #f5f5f5;
       margin: 0;
-      padding: 0;
+      padding: 40px;
     }
 
-    .app {
-      max-width: 480px;
-      margin: 0 auto;
-      padding: 20px;
+    h1 {
+      text-align: center;
+      color: #cc0000;
     }
 
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-
-    .logo {
-      font-size: 22px;
-      font-weight: bold;
-      color: var(--red);
-    }
-
-    .badge {
-      background: var(--red);
-      color: var(--white);
-      padding: 6px 10px;
-      border-radius: 12px;
-      font-size: 12px;
-      font-weight: bold;
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
     .search-box {
-      position: relative;
-      margin-bottom: 15px;
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
     }
 
     input {
-      width: 100%;
-      padding: 14px;
+      flex: 1;
+      padding: 12px;
       font-size: 16px;
-      border: 2px solid var(--red);
-      border-radius: 16px;
-      outline: none;
-      background: var(--white);
-      margin-bottom: 10px;
-    }
-
-    input:focus {
-      border-color: #ff0000;
-      box-shadow: 0 0 0 3px rgba(212, 0, 0, 0.18);
+      border: 2px solid #cc0000;
+      border-radius: 8px;
     }
 
     button {
-      width: 100%;
-      padding: 14px;
+      padding: 12px 20px;
       font-size: 16px;
+      background-color: #cc0000;
+      color: white;
       border: none;
-      border-radius: 16px;
+      border-radius: 8px;
       cursor: pointer;
-      font-weight: bold;
-      color: var(--white);
-      background: var(--red);
     }
 
     button:hover {
-      background: #ff0000;
+      background-color: #a80000;
     }
 
-    .sugerencias {
-      position: absolute;
-      top: 55px;
-      left: 0;
-      right: 0;
-      background: #fff;
-      border: 2px solid var(--red);
-      border-radius: 16px;
-      z-index: 10;
-      overflow: hidden;
+    ul {
+      list-style: none;
+      padding: 0;
     }
 
-    .sugerencia {
-      padding: 12px;
-      cursor: pointer;
-      border-bottom: 1px solid #eee;
-      font-size: 14px;
+    li {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
     }
 
-    .sugerencia:hover {
-      background: #f5f5f5;
-    }
-
-    #resultados {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    .card {
-      border: 2px solid var(--red);
-      border-radius: 18px;
-      padding: 14px;
-      background: var(--card);
-      box-shadow: 0 6px 18px var(--shadow);
-    }
-
-    .card a {
+    a {
       text-decoration: none;
-      color: var(--white);
-      background: var(--red);
-      padding: 10px 14px;
-      border-radius: 14px;
+      color: #333;
       font-weight: bold;
-      display: inline-block;
-    }
-
-    .cat {
-      font-size: 12px;
-      margin-top: 6px;
-      color: #555;
-    }
-
-    .keywords {
-      margin-top: 6px;
-      font-size: 12px;
-      color: #777;
     }
   </style>
 </head>
 
 <body>
-  <div class="app">
 
-    <div class="header">
-      <div class="logo">Buscador de IA para Dummies</div>
-      <div class="badge">BETA</div>
-    </div>
+  <div class="container">
+    <h1>🤖 Buscador de IA para Dummies</h1>
 
     <div class="search-box">
-      <input
-        id="busqueda"
-        placeholder="Ej: generar imagen, escribir texto, editar video..."
-        oninput="autocompletar()"
-      >
-      <button onclick="buscarIA()">Buscar</button>
-      <div id="sugerencias" class="sugerencias"></div>
+      <input type="text" id="searchInput" placeholder="Ej: imágenes, texto, voz...">
+      <button onclick="buscar()">Buscar</button>
     </div>
 
-    <div id="resultados"></div>
-
+    <ul id="resultados"></ul>
   </div>
 
+  <!-- SCRIPT -->
   <script>
-    const aiTools = [
-      {
-        name: "ChatGPT",
-        category: "Texto",
-        keywords: ["escribir", "texto", "ideas", "responder", "explicar", "chat"],
-        link: "https://chat.openai.com"
-      },
-      {
-        name: "Midjourney",
-        category: "Imágenes",
-        keywords: ["imagen", "imagenes", "dibujar", "arte", "diseño"],
-        link: "https://www.midjourney.com"
-      },
-      {
-        name: "Leonardo AI",
-        category: "Imágenes",
-        keywords: ["render", "producto", "diseño", "imagen"],
-        link: "https://leonardo.ai"
-      },
-      {
-        name: "Suno",
-        category: "Música",
-        keywords: ["musica", "cancion", "audio"],
-        link: "https://suno.ai"
-      },
-      {
-        name: "Runway",
-        category: "Video",
-        keywords: ["video", "editar video", "crear video"],
-        link: "https://runwayml.com"
-      },
-      {
-        name: "GitHub Copilot",
-        category: "Código",
-        keywords: ["codigo", "programar", "javascript", "html"],
-        link: "https://github.com/features/copilot"
-      }
+    const herramientas = [
+      { nombre: "ChatGPT", categoria: "texto", link: "https://chat.openai.com" },
+      { nombre: "Midjourney", categoria: "imagenes", link: "https://www.midjourney.com" },
+      { nombre: "Leonardo AI", categoria: "imagenes", link: "https://leonardo.ai" },
+      { nombre: "ElevenLabs", categoria: "voz", link: "https://elevenlabs.io" }
     ];
 
-    function mostrarTodas() {
-      const resultados = document.getElementById("resultados");
-      resultados.innerHTML = "";
+    function buscar() {
+      const texto = document.getElementById("searchInput").value.toLowerCase();
+      const lista = document.getElementById("resultados");
+      lista.innerHTML = "";
 
-      aiTools.forEach(tool => {
-        const div = document.createElement("div");
-        div.className = "card";
-        div.innerHTML = `
-          <a href="${tool.link}" target="_blank">${tool.name}</a>
-          <div class="cat">${tool.category}</div>
-          <div class="keywords">${tool.keywords.join(", ")}</div>
-        `;
-        resultados.appendChild(div);
-      });
-    }
-
-    function buscarIA() {
-      const input = document.getElementById("busqueda").value.toLowerCase();
-      const resultados = document.getElementById("resultados");
-      resultados.innerHTML = "";
-
-      const matches = aiTools.filter(tool =>
-        tool.keywords.some(k => input.includes(k))
+      const filtrados = herramientas.filter(h =>
+        h.categoria.includes(texto) || h.nombre.toLowerCase().includes(texto)
       );
 
-      if (matches.length === 0) {
-        resultados.innerHTML = "No se encontraron resultados 🤷‍♂️";
+      if (filtrados.length === 0) {
+        lista.innerHTML = "<li>No se encontraron resultados</li>";
         return;
       }
 
-      matches.forEach(tool => {
-        const div = document.createElement("div");
-        div.className = "card";
-        div.innerHTML = `
-          <a href="${tool.link}" target="_blank">${tool.name}</a>
-          <div class="cat">${tool.category}</div>
-          <div class="keywords">${tool.keywords.join(", ")}</div>
-        `;
-        resultados.appendChild(div);
+      filtrados.forEach(h => {
+        const li = document.createElement("li");
+        li.innerHTML = `<a href="${h.link}" target="_blank">${h.nombre}</a> – ${h.categoria}`;
+        lista.appendChild(li);
       });
     }
-
-    function autocompletar() {
-      const input = document.getElementById("busqueda").value.toLowerCase();
-      const cont = document.getElementById("sugerencias");
-      cont.innerHTML = "";
-
-      if (input.length < 2) return;
-
-      aiTools
-        .filter(t =>
-          t.name.toLowerCase().includes(input) ||
-          t.keywords.some(k => k.includes(input))
-        )
-        .slice(0, 5)
-        .forEach(tool => {
-          const div = document.createElement("div");
-          div.className = "sugerencia";
-          div.textContent = tool.name;
-          div.onclick = () => {
-            document.getElementById("busqueda").value = tool.name;
-            cont.innerHTML = "";
-            buscarIA();
-          };
-          cont.appendChild(div);
-        });
-    }
-
-    window.onload = mostrarTodas;
   </script>
+
 </body>
 </html>
