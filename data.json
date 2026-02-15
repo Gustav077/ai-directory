@@ -410,5 +410,14 @@
     ],
     "link": "https://github.com/duixcom/Duix-Avatar",
     "description": "🚀 Truly open-source AI avatar(digital human) toolkit for offline video generation and digital human cloning."
+  },
+  {
+    "name": "xiaozhi-esp32",
+    "category": "Chatbot",
+    "keywords": [
+      "chatbot"
+    ],
+    "link": "https://github.com/78/xiaozhi-esp32",
+    "description": "An MCP-based chatbot | 一个基于MCP的聊天机器人"
   }
 ]
