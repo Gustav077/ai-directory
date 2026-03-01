@@ -419,5 +419,14 @@
     ],
     "link": "https://github.com/78/xiaozhi-esp32",
     "description": "An MCP-based chatbot | 一个基于MCP的聊天机器人"
+  },
+  {
+    "name": "awesome-claude-skills",
+    "category": "General",
+    "keywords": [
+      "ai tool"
+    ],
+    "link": "https://github.com/ComposioHQ/awesome-claude-skills",
+    "description": "A curated list of awesome Claude Skills, resources, and tools for customizing Claude AI workflows"
   }
 ]
