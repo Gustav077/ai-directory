@@ -428,5 +428,14 @@
     ],
     "link": "https://github.com/ComposioHQ/awesome-claude-skills",
     "description": "A curated list of awesome Claude Skills, resources, and tools for customizing Claude AI workflows"
+  },
+  {
+    "name": "AstrBot",
+    "category": "Chatbot",
+    "keywords": [
+      "chatbot"
+    ],
+    "link": "https://github.com/AstrBotDevs/AstrBot",
+    "description": "Agentic IM Chatbot infrastructure that integrates lots of IM platforms, LLMs, plugins and AI feature, and can be your openclaw alternative. ✨"
   }
 ]
