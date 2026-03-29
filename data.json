@@ -437,5 +437,41 @@
     ],
     "link": "https://github.com/AstrBotDevs/AstrBot",
     "description": "Agentic IM Chatbot infrastructure that integrates lots of IM platforms, LLMs, plugins and AI feature, and can be your openclaw alternative. ✨"
+  },
+  {
+    "name": "OpenSpec",
+    "category": "Chatbot",
+    "keywords": [
+      "ai assistant"
+    ],
+    "link": "https://github.com/Fission-AI/OpenSpec",
+    "description": "Spec-driven development (SDD) for AI coding assistants."
+  },
+  {
+    "name": "DALLE2-pytorch",
+    "category": "Imagen",
+    "keywords": [
+      "text-to-image"
+    ],
+    "link": "https://github.com/lucidrains/DALLE2-pytorch",
+    "description": "Implementation of DALL-E 2, OpenAI's updated text-to-image synthesis neural network,  in Pytorch"
+  },
+  {
+    "name": "llm-course",
+    "category": "General",
+    "keywords": [
+      "llm"
+    ],
+    "link": "https://github.com/mlabonne/llm-course",
+    "description": "Course to get into Large Language Models (LLMs) with roadmaps and Colab notebooks."
+  },
+  {
+    "name": "Daft",
+    "category": "Audio",
+    "keywords": [
+      "audio ai"
+    ],
+    "link": "https://github.com/Eventual-Inc/Daft",
+    "description": "High-performance data engine for AI and multimodal workloads. Process images, audio, video, and structured data at any scale"
   }
 ]
