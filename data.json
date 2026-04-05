@@ -473,5 +473,23 @@
     ],
     "link": "https://github.com/Eventual-Inc/Daft",
     "description": "High-performance data engine for AI and multimodal workloads. Process images, audio, video, and structured data at any scale"
+  },
+  {
+    "name": "nanobot",
+    "category": "Chatbot",
+    "keywords": [
+      "ai assistant"
+    ],
+    "link": "https://github.com/HKUDS/nanobot",
+    "description": "\"🐈 nanobot: The Ultra-Lightweight Personal AI Assistant\""
+  },
+  {
+    "name": "easydiffusion",
+    "category": "Imagen",
+    "keywords": [
+      "text-to-image"
+    ],
+    "link": "https://github.com/easydiffusion/easydiffusion",
+    "description": "An easy 1-click way to create beautiful artwork on your PC using AI, with no tech knowledge. Provides a browser UI for generating images from text prompts and images. Just enter your text prompt, and see the generated image."
   }
 ]
