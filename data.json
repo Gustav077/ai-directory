@@ -491,5 +491,23 @@
     ],
     "link": "https://github.com/easydiffusion/easydiffusion",
     "description": "An easy 1-click way to create beautiful artwork on your PC using AI, with no tech knowledge. Provides a browser UI for generating images from text prompts and images. Just enter your text prompt, and see the generated image."
+  },
+  {
+    "name": "ragflow",
+    "category": "General",
+    "keywords": [
+      "llm"
+    ],
+    "link": "https://github.com/infiniflow/ragflow",
+    "description": "RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs"
+  },
+  {
+    "name": "graphify",
+    "category": "Video",
+    "keywords": [
+      "video ai"
+    ],
+    "link": "https://github.com/safishamsi/graphify",
+    "description": "AI coding assistant skill (Claude Code, Codex, OpenCode, Cursor, Gemini CLI, OpenClaw, Factory Droid, Trae). Turn any folder of code, docs, papers, images, videos, or YouTube links into a queryable knowledge graph"
   }
 ]
