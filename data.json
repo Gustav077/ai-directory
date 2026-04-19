@@ -509,5 +509,14 @@
     ],
     "link": "https://github.com/safishamsi/graphify",
     "description": "AI coding assistant skill (Claude Code, Codex, OpenCode, Cursor, Gemini CLI, OpenClaw, Factory Droid, Trae). Turn any folder of code, docs, papers, images, videos, or YouTube links into a queryable knowledge graph"
+  },
+  {
+    "name": "wechaty",
+    "category": "Chatbot",
+    "keywords": [
+      "chatbot"
+    ],
+    "link": "https://github.com/wechaty/wechaty",
+    "description": "Conversational RPA SDK for Chatbot Makers. Join our Discord: https://discord.gg/7q8NBZbQzt"
   }
 ]
