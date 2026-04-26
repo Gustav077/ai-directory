@@ -518,5 +518,14 @@
     ],
     "link": "https://github.com/wechaty/wechaty",
     "description": "Conversational RPA SDK for Chatbot Makers. Join our Discord: https://discord.gg/7q8NBZbQzt"
+  },
+  {
+    "name": "andrej-karpathy-skills",
+    "category": "General",
+    "keywords": [
+      "llm"
+    ],
+    "link": "https://github.com/forrestchang/andrej-karpathy-skills",
+    "description": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls."
   }
 ]
