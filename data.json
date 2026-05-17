@@ -536,5 +536,23 @@
     ],
     "link": "https://github.com/cvat-ai/cvat",
     "description": "Computer Vision Annotation Tool (CVAT) is a leading platform for building high-quality visual datasets for vision AI. It offers open-source, cloud, and enterprise products, as well as labeling services, for image, video, and 3D annotation with AI-assisted labeling, quality assurance, team collaboration, analytics, and developer APIs."
+  },
+  {
+    "name": "andrej-karpathy-skills",
+    "category": "General",
+    "keywords": [
+      "llm"
+    ],
+    "link": "https://github.com/multica-ai/andrej-karpathy-skills",
+    "description": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls."
+  },
+  {
+    "name": "Pixelle-Video",
+    "category": "Video",
+    "keywords": [
+      "video ai"
+    ],
+    "link": "https://github.com/AIDC-AI/Pixelle-Video",
+    "description": "🚀 AI 全自动短视频引擎 | AI Fully Automated Short Video Engine"
   }
 ]
