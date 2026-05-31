@@ -554,5 +554,32 @@
     ],
     "link": "https://github.com/AIDC-AI/Pixelle-Video",
     "description": "🚀 AI 全自动短视频引擎 | AI Fully Automated Short Video Engine"
+  },
+  {
+    "name": "presenton",
+    "category": "General",
+    "keywords": [
+      "ai generator"
+    ],
+    "link": "https://github.com/presenton/presenton",
+    "description": "Open-Source AI Presentation Generator and API (Gamma, Beautiful AI, Decktopus Alternative)"
+  },
+  {
+    "name": "ppt-master",
+    "category": "Audio",
+    "keywords": [
+      "audio ai"
+    ],
+    "link": "https://github.com/hugohe3/ppt-master",
+    "description": "AI generates a real, editable PowerPoint from any document — native shapes & animations, speaker notes voiced as audio narration, and the option to follow your own .pptx template, not slide images · by Hugo He"
+  },
+  {
+    "name": "Open-Generative-AI",
+    "category": "Video",
+    "keywords": [
+      "video ai"
+    ],
+    "link": "https://github.com/Anil-matcha/Open-Generative-AI",
+    "description": "Open-source alternative to AI video platforms — Free AI image & video generation studio with 200+ models (Flux, Midjourney, Kling, Sora, Veo). No content filters. Self-hosted, MIT licensed."
   }
 ]
