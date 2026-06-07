@@ -581,5 +581,14 @@
     ],
     "link": "https://github.com/Anil-matcha/Open-Generative-AI",
     "description": "Open-source alternative to AI video platforms — Free AI image & video generation studio with 200+ models (Flux, Midjourney, Kling, Sora, Veo). No content filters. Self-hosted, MIT licensed."
+  },
+  {
+    "name": "TradingAgents",
+    "category": "General",
+    "keywords": [
+      "llm"
+    ],
+    "link": "https://github.com/TauricResearch/TradingAgents",
+    "description": "TradingAgents: Multi-Agents LLM Financial Trading Framework"
   }
 ]
