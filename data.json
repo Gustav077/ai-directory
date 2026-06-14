@@ -590,5 +590,14 @@
     ],
     "link": "https://github.com/TauricResearch/TradingAgents",
     "description": "TradingAgents: Multi-Agents LLM Financial Trading Framework"
+  },
+  {
+    "name": "awesome-n8n-templates",
+    "category": "Chatbot",
+    "keywords": [
+      "chatbot"
+    ],
+    "link": "https://github.com/enescingoz/awesome-n8n-templates",
+    "description": "280+ free n8n automation templates — ready-to-use workflows for Gmail, Telegram, Slack, Discord, WhatsApp, Google Drive, Notion, OpenAI, and more. AI agents, RAG   chatbots, email automation, social media, DevOps, and document processing. The largest open-source n8n template collection."
   }
 ]
