@@ -599,5 +599,14 @@
     ],
     "link": "https://github.com/enescingoz/awesome-n8n-templates",
     "description": "280+ free n8n automation templates — ready-to-use workflows for Gmail, Telegram, Slack, Discord, WhatsApp, Google Drive, Notion, OpenAI, and more. AI agents, RAG   chatbots, email automation, social media, DevOps, and document processing. The largest open-source n8n template collection."
+  },
+  {
+    "name": "pyod",
+    "category": "Audio",
+    "keywords": [
+      "audio ai"
+    ],
+    "link": "https://github.com/yzhao062/pyod",
+    "description": "A Python library for anomaly detection across tabular, time series, graph, text, image, and audio data. 60+ detectors, benchmark-backed ADEngine orchestration, and an agentic workflow for AI agents."
   }
 ]
