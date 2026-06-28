@@ -608,5 +608,14 @@
     ],
     "link": "https://github.com/yzhao062/pyod",
     "description": "A Python library for anomaly detection across tabular, time series, graph, text, image, and audio data. 60+ detectors, benchmark-backed ADEngine orchestration, and an agentic workflow for AI agents."
+  },
+  {
+    "name": "OpenMontage",
+    "category": "Video",
+    "keywords": [
+      "video ai"
+    ],
+    "link": "https://github.com/calesthio/OpenMontage",
+    "description": "World's first open-source, agentic video production system. 12 pipelines, 52 tools, 500+ agent skills. Turn your AI coding assistant into a full video production studio."
   }
 ]
