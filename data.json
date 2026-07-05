@@ -617,5 +617,32 @@
     ],
     "link": "https://github.com/calesthio/OpenMontage",
     "description": "World's first open-source, agentic video production system. 12 pipelines, 52 tools, 500+ agent skills. Turn your AI coding assistant into a full video production studio."
+  },
+  {
+    "name": "graphify",
+    "category": "Chatbot",
+    "keywords": [
+      "ai assistant"
+    ],
+    "link": "https://github.com/Graphify-Labs/graphify",
+    "description": "AI coding assistant skill (Claude Code, Codex, OpenCode, Cursor, Gemini CLI, and more). Turn any folder of code, SQL schemas, R scripts, shell scripts, docs, papers, images, or videos into a queryable knowledge graph. App code + database schema + infrastructure in one graph."
+  },
+  {
+    "name": "voicebox",
+    "category": "Audio",
+    "keywords": [
+      "voice ai"
+    ],
+    "link": "https://github.com/jamiepine/voicebox",
+    "description": "The open-source AI voice studio. Clone, dictate, create."
+  },
+  {
+    "name": "Pixelle-Video",
+    "category": "Video",
+    "keywords": [
+      "video ai"
+    ],
+    "link": "https://github.com/ATH-MaaS/Pixelle-Video",
+    "description": "🚀 AI 全自动短视频引擎 | AI Fully Automated Short Video Engine"
   }
 ]
