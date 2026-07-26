@@ -644,5 +644,23 @@
     ],
     "link": "https://github.com/ATH-MaaS/Pixelle-Video",
     "description": "🚀 AI 全自动短视频引擎 | AI Fully Automated Short Video Engine"
+  },
+  {
+    "name": "dify",
+    "category": "General",
+    "keywords": [
+      "ai tool"
+    ],
+    "link": "https://github.com/langgenius/dify",
+    "description": "Build Agentic workflows, RAG pipelines, with rich AI model and tool support on one collaborative workspace. Deploy on cloud, VPC, or self-hosted, so teams move from prototype to production without rebuilding the stack."
+  },
+  {
+    "name": "CowAgent",
+    "category": "Chatbot",
+    "keywords": [
+      "ai assistant"
+    ],
+    "link": "https://github.com/zhayujie/CowAgent",
+    "description": "Open-source super AI assistant & Agent Harness. Plans tasks, runs tools and skills, self-evolves with memory and knowledge. Multi-model, multi-channel. Lightweight, extensible, one-line install. (formerly chatgpt-on-wechat)"
   }
 ]
