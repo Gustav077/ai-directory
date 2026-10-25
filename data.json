@@ -680,5 +680,14 @@
     ],
     "link": "https://github.com/earendil-works/pi",
     "description": "AI agent toolkit: unified LLM API, agent loop, TUI, coding agent CLI"
+  },
+  {
+    "name": "open-design",
+    "category": "Video",
+    "keywords": [
+      "video ai"
+    ],
+    "link": "https://github.com/nexu-io/open-design",
+    "description": "The 1st Collaborative AI Design Agent Workspace. Local-first and open source. Create motion, prototypes, websites, apps, dashboards, presentations, images, and videos with your team and AI agents. Share work, exchange feedback, and iterate together in one workspace."
   }
 ]
