@@ -689,5 +689,14 @@
     ],
     "link": "https://github.com/nexu-io/open-design",
     "description": "The 1st Collaborative AI Design Agent Workspace. Local-first and open source. Create motion, prototypes, websites, apps, dashboards, presentations, images, and videos with your team and AI agents. Share work, exchange feedback, and iterate together in one workspace."
+  },
+  {
+    "name": "OpenCreator",
+    "category": "Audio",
+    "keywords": [
+      "audio ai"
+    ],
+    "link": "https://github.com/krillinai/OpenCreator",
+    "description": "Formerly KrillinAI, VideoTranslation and Dubbing Tool for 120+ Languages. Open-source AI workspace for creators, powered by Codex. Video downloader, video translation, create videos, images, audios, and edits with Agents in one place. For your Social Media like YouTube, TikTok, Instagram, etc."
   }
 ]
